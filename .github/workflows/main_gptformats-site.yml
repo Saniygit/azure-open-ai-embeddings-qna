@@ -2,8 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
 name: Build and deploy container app to Azure Web App - gptformats-site
-env:
-   APP_CONFIGURATION_CONNECTION_STRING : ${{ secrets.APP_CONFIGURATION_CONNECTION_STRING }}
+
 on:
   push:
     branches:
@@ -24,13 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://github.com/saniygit/azure-open-ai-embeddings-qna/
-        username: ${{ secrets.AzureAppService_ContainerUsername_77fac8c5945046748b7d8c12afe35796 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_f374215b410c4ce5bced1f6189a5833d }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_d0cab61c4f1344b2b979543de1dabd3c }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_c0a503d93c9f48a3aef0afa2eee327c4 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
+        tags: github.com/saniygit/azure-open-ai-embeddings-qna/${{ secrets.AzureAppService_ContainerUsername_d0cab61c4f1344b2b979543de1dabd3c }}/fruocco/oai-embeddings:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'gptformats-site'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_48347fe667ef4513b2e0aed74a079063 }}
-        images: 'github.com/saniygit/azure-open-ai-embeddings-qna/${{ secrets.AzureAppService_ContainerUsername_77fac8c5945046748b7d8c12afe35796 }}/fruocco/oai-embeddings:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_5143e9743a2843ff98359303df871ef2 }}
+        images: 'github.com/saniygit/azure-open-ai-embeddings-qna/${{ secrets.AzureAppService_ContainerUsername_d0cab61c4f1344b2b979543de1dabd3c }}/fruocco/oai-embeddings:${{ github.sha }}'
