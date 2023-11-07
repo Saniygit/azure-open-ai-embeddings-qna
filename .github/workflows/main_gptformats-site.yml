@@ -31,7 +31,6 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: github.com/saniygit/azure-open-ai-embeddings-qna/${{ secrets.AzureAppService_ContainerUsername_77fac8c5945046748b7d8c12afe35796 }}/fruocco/oai-embeddings:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
